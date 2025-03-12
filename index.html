@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/Css/style.css">
+    <title>Mysql PHP e JavaScript</title>
+</head>
+
+<body>
+    <h1 class="Titulo"> MYSQL PHP e JavaScript</h1>
+        <div id="msg">
+            <p class="text-msg" id="msg-title"></p>
+        </div>
+    <div class="container">
+        <div class="neon"></div>
+        <form id="my-form" method="post">
+            <div class="form-control">
+                <div class="grup-form">
+                    <input type="text" name="nome" class="campo" id="nome_camp" placeholder=" ">
+                    <label for="nome_camp">Nome :</label>
+                </div>
+                <div class="grup-form">
+                    <input type="text" class="campo" name="Sob_nome" id="sob_camp" placeholder=" ">
+                    <label for="sob_camp">Sobrenome :</label>
+                </div>
+                <div class="grup-form">
+                    <label for="genero_camp">Genero</label>
+                    <select name="genero"  class="campo" id="genero_camp">
+                        <option value="" disabled selected>Selecionar Genero</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="grup-form">
+                    <label for="datacamp">Data de Nacimento</label>
+                    <input type="date" class="campo" min="1950-01-01" max="1950-01-02" name="Indata" id="datacamp">
+                </div>
+                <button type="submit" id="btn-enviar">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <script src="assets/Javascript/script.js"></script>
+</body>
+
+</html>

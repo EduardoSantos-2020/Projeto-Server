@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800&family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,600&display=swap');
+
+:root {
+    --Font-Principal: 'Nunito', 'sans-serif';
+    --Font-Alternartiva: 'Rubik', 'sans-serif';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(4, 100, 239);
+    color: #fff;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-family: var(--Font-Principal);
+    font-weight: 900;
+    text-shadow: 2px 2px rgb(37, 43, 49);
+    margin: 1em;
+}
+
+.container {
+    position: relative;
+    width: 37.5em;
+    height: 28em;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(63, 65, 66);
+    border-radius: 8px;
+    box-shadow: -1px -1px 25px 7px rgb(43, 43, 44);
+}
+
+
+#msg {
+    position: absolute;
+    top: 0;
+    width: 45%;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    border: #000 1px solid;
+    box-shadow: #000 2px 2px 2px;
+    opacity: 0;
+    transition: all .7s ease;
+}
+
+.text-msg {
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: var(--Font-Principal);
+}
+
+.success {
+    background-color: #0f8300ea;
+    top: 5em;
+}
+
+.error {
+    background-color: #dd0202;
+    transition: all .7s linear;
+}
+
+.neon {
+    position: absolute;
+    background-image: conic-gradient(transparent, transparent, transparent, #f70c0c);
+    width: 450px;
+    height: 840px;
+    animation: matrix 15s linear infinite;
+}
+
+.neon::after {
+    position: absolute;
+    content: '';
+    background-image: conic-gradient(transparent, transparent, transparent, rgb(58, 116, 241));
+    width: 450px;
+    height: 840px;
+    transform: rotate(-180deg);
+}
+
+@keyframes matrix {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+form {
+    position: relative;
+    background-color: rgb(83, 85, 85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37.1em;
+    height: 27.7em;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+    -webkit-box-shadow: inset 24px 13px 170px -14px rgba(53, 52, 52, 0.59);
+    -moz-box-shadow: inset 24px 13px 170px -14px rgba(53, 52, 52, 0.59);
+    box-shadow: inset 24px 13px 170px -14px rgba(53, 52, 52, 0.59);
+}
+
+
+.form-control {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.grup-form {
+    position: relative;
+    padding: 22px;
+    display: flex;
+    width: 100%;
+}
+
+
+.grup-form label {
+    font-size: 1em;
+    text-shadow: 1px 1px 4px #000;
+    font-family: var(--Font-Alternartiva);
+    font-weight: 500;
+    vertical-align: bottom;
+    text-align: bottom;
+}
+
+.grup-form:nth-child(1) label,
+.grup-form:nth-child(2) label {
+    position: absolute;
+    top: 1.8rem;
+    transition: all .5s ease-in-out;
+}
+
+
+
+.grup-form:nth-child(1) input,
+.grup-form:nth-child(2) input {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    width: 250px;
+    font-size: 1rem;
+    font-family: var(--Font-Alternartiva);
+    font-weight: 500;
+    color: #fff;
+
+    border-radius: 3px;
+    border-bottom: 3px solid #fff;
+    transition: all 1s ease;
+}
+
+.grup-form:nth-child(1) input:focus,
+.grup-form:nth-child(2) input:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    user-select: none;
+    border-radius: 3px;
+    border-bottom: 3px solid #f70c0c;
+}
+
+ #nome_camp.groupFocus,#sob_camp.groupFocus{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    user-select: none;
+    border-radius: 3px;
+    border-bottom: 3px solid #f70c0c;
+}
+
+.grup-form:nth-child(1) input:-webkit-autofill,
+.grup-form:nth-child(1) input:-webkit-autofill:hover,
+.grup-form:nth-child(1) input:-webkit-autofill:focus,
+.grup-form:nth-child(1) input:-webkit-autofill:active {
+    -webkit-text-fill-color: #fff;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.grup-form:nth-child(2) input:-webkit-autofill,
+.grup-form:nth-child(2) input:-webkit-autofill:hover,
+.grup-form:nth-child(2) input:-webkit-autofill:focus,
+.grup-form:nth-child(2) input:-webkit-autofill:active {
+    -webkit-text-fill-color: #fff;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.grup-form:nth-child(1) input:focus~label,
+.grup-form:nth-child(1) input:not(:placeholder-shown)~label {
+    top: .3rem;
+    font-size: .8em;
+    transition: all .5s ease-in-out;
+}
+
+.grup-form:nth-child(2) input:focus~label,
+.grup-form:nth-child(2) input:not(:placeholder-shown)~label {
+    top: .3rem;
+    font-size: .8em;
+    transition: all .5s ease-in-out;
+}
+.grup-form:nth-child(1) input:focus~label,
+.grup-form:nth-child(1) input:not(:placeholder-shown)~label {
+    top: .3rem;
+    font-size: .8em;
+    transition: all .5s ease-in-out;
+}
+
+.grup-form .groupFocus ~ label{
+    top: .3rem;
+    font-size: .8em;
+    transition: all .5s ease-in-out;
+}
+
+.grup-form:nth-child(2) input:focus~label,
+.grup-form:nth-child(2) input:not(:placeholder-shown)~label {
+    top: .3rem;
+    font-size: .8em;
+    transition: all .5s ease-in-out;
+}
+
+
+.grup-form:nth-child(3) label,
+.grup-form:nth-child(4) label {
+    padding: 5px 0;
+}
+
+#genero_camp {
+    position: relative;
+    display: flex;
+    padding: 10px;
+    margin: 0 15px;
+    width: 45%;
+    border-radius: 5px;
+    font-family: var(--Font-Alternartiva);
+    font-size: 1rem;
+    font-weight: 500;
+    outline-style: none;
+}
+
+#datacamp {
+    padding: 10px;
+    margin: 0 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline-color: #f70c0c;
+    border: none;
+    font-weight: 500;
+    font-family: var(--Font-Alternartiva);
+    border: 1px solid transparent;
+}
+
+.grup-form select:focus,
+#datacamp:focus  {
+    border-color: #f70c0c;
+    color: #b80101;
+    outline-style: solid;
+    box-shadow: -1px -1px 10px 3px #f70c0c
+}
+
+select.groupFocus,input[type='date'].groupFocus {
+    border-color: #f70c0c;
+    color: #b80101;
+    outline-style: solid;
+    box-shadow: -1px -1px 10px 3px #f70c0c
+}
+
+.grup-form select .cam .error:focus,
+#datacamp .cam .error:focus {
+    border-color: #f70c0c;
+    color: #b80101;
+    outline-style: solid;
+    box-shadow: -1px -1px 10px 3px #f70c0c
+}
+
+#btn-enviar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    padding: 12px;
+    background-color: #f70c0c;
+    border: 3px solid #f70c0c;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-family: var(--Font-Principal);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #e4e1e1;
+    transition: all .5s ease-in-out;
+}
+
+#btn-enviar:hover {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #ddd9d9;
+    box-shadow: -1px -1px 10px 3px #ff0000
+}

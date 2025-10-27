@@ -8,7 +8,7 @@ header("Access-Control-Allow-Methods:GET,POST");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  $campos = ["nome", "sobre_nome", "genero", "data_nacimento"];
+  $campos = ["nome", "sobrenome", "genero", "data_nacimento"];
   $erros = [];
   $dados = [];
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($erros)) {
 
     $CapsName = ucfirst($dados['nome']);
-    $CapsSobName = ucfirst($dados['sobre_nome']);
+    $CapsSobName = ucfirst($dados['sobrenome']);
 
     $sql = "INSERT INTO Users(Nome,Sobrenome,Nacimento,Genero) VALUES('$CapsName','$CapsSobName', '$dados[data_nacimento]','$dados[genero]')";
 

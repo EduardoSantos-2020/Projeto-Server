@@ -55,11 +55,16 @@ MyForm.addEventListener('submit', async e => {
     body: formData,
   }).then(response => response.json())
     .then(function (data) {
+
       contMsg.classList.add(`${data.status}`);
-      nome.classList.add(`${data.status}`);
-      sobNome.classList.add(`${data.status}`);
-      genero.classList.add(`cam${data.status}`);
-      date.classList.add(`cam${data.status}`);
+      contMsg.style.opacity = '1';
+      contMsg.style.top = '3em';
+      msg.innerHTML = data.message;
+
+      // nome.classList.add(`${data.status}`);
+      // sobNome.classList.add(`${data.status}`);
+      // genero.classList.add(`cam${data.status}`);
+      // date.classList.add(`cam${data.status}`);
 
       if (nome.classList.contains('error') && nome.value == '') {
         nome.focus();
@@ -70,9 +75,6 @@ MyForm.addEventListener('submit', async e => {
       } else if (date.classList.contains('camerror') && date.value == '') {
         date.focus();
       }
-      contMsg.style.opacity = '1';
-      contMsg.style.top = '3em';
-      msg.innerHTML = data.message;
 
       setTimeout(() => {
         contMsg.style.opacity = '0';
@@ -92,31 +94,21 @@ MyForm.addEventListener('submit', async e => {
       }
 
     }).catch(function (error) {
-      if (checkedInput.length >= camposInput.length) {
 
-        contMsg.classList.add('error');
-        contMsg.style.opacity = '1';
-        contMsg.style.top = '3em';
-        msg.innerHTML = 'Ops! ocorreu Erro 503 ao acessar o servidor !';
+      contMsg.classList.add('error');
+      contMsg.style.opacity = '1';
+      contMsg.style.top = '3em';
+      msg.innerHTML = 'Ocorreu um Erro , vamos recarregar a pagina !';
+      console.log(error);
 
-        setTimeout(() => {
-          contMsg.style.opacity = '0';
-          contMsg.style.top = '0';
-        }, 5000);
+      setTimeout(() => {
+        window.location.reload()
+      }, 8000)
 
-      } else {
+      // setTimeout(() => {
+      //   contMsg.style.opacity = '0';
+      //   contMsg.style.top = '0';
+      // }, 5000)
 
-        contMsg.classList.add('error');
-        contMsg.style.opacity = '1';
-        contMsg.style.top = '3em';
-        msg.innerHTML = 'Ocorreu um Erro preencha todos campos por favor!';
-
-        setTimeout(() => {
-          contMsg.style.opacity = '0';
-          contMsg.style.top = '0';
-        }, 5000)
-      }
-    });
-
-
+    })
 })

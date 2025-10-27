@@ -1,60 +1,59 @@
 <?php
+
+include_once('conecao.php');
 header("Access-Control-Allow-Headers:Content-Type");
+header('Content-Type: application/json');
 header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Methods:GET,POST");
-class Obj
-{
-    public $status, $message;
-    function status($status, $message)
-    {
-        $this->status = $status;
-        $this->message = $message;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $campos = ["nome", "sobre_nome", "genero", "data_nacimento"];
+  $erros = [];
+  $dados = [];
+
+  // Laço for para validar os campos
+
+  for ($i = 0; $i < count($campos); $i++) {
+
+    $campo = $campos[$i];
+    $valor = trim($_POST[$campo]);
+
+    if (empty($valor)) {
+
+
+      if ($campo != 'genero') {
+
+        $obj->status('error', 'preencha o ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . " é obrigatório.");
+        echo json_encode($obj);
+        break;
+      } else {
+        $obj->status('error', 'Erro ao confimar Selecione um ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . ' valido !');
+        echo json_encode($obj);
+        break;
+      }
+    } else {
+      $dados[$campo] = mysqli_real_escape_string($conn, $valor);
     }
-}
-include_once('conecao.php');
+  }
 
-$_Nome = $_POST['nome'];
-$_SobNome = $_POST['Sob_nome'];
-$_Genero = $_POST['genero'];
-$_Data = $_POST['Indata'];
+  if (empty($erros)) {
 
-$obj = new Obj;
+    $CapsName = ucfirst($dados['nome']);
+    $CapsSobName = ucfirst($dados['sobre_nome']);
 
-switch ($_POST) {
-    case empty($_POST['nome']):
-        $obj->status('error', 'Erro ao confimar Digite seu nome !');
-        echo json_encode($obj);
-        break;
+    $sql = "INSERT INTO Users(Nome,Sobrenome,Nacimento,Genero) VALUES('$CapsName','$CapsSobName', '$dados[data_nacimento]','$dados[genero]')";
 
-    case empty($_POST['Sob_nome']):
-        $obj->status('error', 'Erro ao confimar Digite seu sobrenome !');
-        echo json_encode($obj);
-        break;
-
-    case empty($_POST['genero']):
-        $obj->status('error', 'Erro ao confimar Selecione um genero valido !');
-        echo json_encode($obj);
-        break;
-
-    case empty($_POST['Indata']):
-        $obj->status('error', 'Erro ao confimar uma data de nacimento!');
-        echo json_encode($obj);
-        break;
-
-    default:
-    $sql = "INSERT INTO Users(Nome,Sobrenome,Nacimento,Genero) VALUES('$_Nome','$_SobNome','$_Data','$_Genero')";
-    mysqli_query($conn,$sql);
-    mysqli_close($conn);  
+    mysqli_query($conn, $sql);
+    mysqli_close($conn);
     $obj->status('success', 'Cadastro feito com sucesso !');
     echo json_encode($obj);
-    break;
+  }
 }
 
 // $stmt = $conn->prepare($sql);
 // $stmt->bindParam(':nome', $_Nome);
-// $stmt->bindParam(':Sob_nome', $_SobNome);
+// $stmt->bindParam(':Sob_nome', $_sobNome);
 // $stmt->bindParam(':genero', $_Genero);
 // $stmt->bindParam(':Indata', $_Data);
 // $stmt->execute();
-
-?>

@@ -1,10 +1,17 @@
 <?php
 
-include_once('conecao.php');
-header("Access-Control-Allow-Headers:Content-Type");
-header('Content-Type: application/json');
-header("Access-Control-Allow-Origin:*");
-header("Access-Control-Allow-Methods:GET,POST");
+include_once('conexao.php');
+
+if (!$conn) {
+
+    $obj->status('error', 'Estamos com problemas com o site aguarde !');
+
+    
+}else {
+    $obj->status('success', 'Site carregado com sucesso !');
+    
+    }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -24,17 +31,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($campo != 'genero') {
 
-        $obj->status('error', 'preencha o ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . " é obrigatório.");
-        echo json_encode($obj);
+        $obj->status('error', 'preencha  ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . " é obrigatório.");
+       
         break;
       } else {
         $obj->status('error', 'Erro ao confimar Selecione um ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . ' valido !');
-        echo json_encode($obj);
+    
         break;
       }
     } else {
       $dados[$campo] = mysqli_real_escape_string($conn, $valor);
     }
+
+   
   }
 
   if (empty($erros)) {
@@ -47,10 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_query($conn, $sql);
     mysqli_close($conn);
     $obj->status('success', 'Cadastro feito com sucesso !');
-    echo json_encode($obj);
+  
   }
 }
-
+ echo json_encode($obj);
 // $stmt = $conn->prepare($sql);
 // $stmt->bindParam(':nome', $_Nome);
 // $stmt->bindParam(':Sob_nome', $_sobNome);

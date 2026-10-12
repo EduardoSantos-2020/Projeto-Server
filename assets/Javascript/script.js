@@ -24,6 +24,26 @@ function blocked(e) {
   }
 }
 
+window.addEventListener('load', async () => {
+    const asck = await fetch('http://localhost/Projeto-Server/assets/PHP/Informacao.php', {
+    method: 'GET',
+    mode: 'cors',
+  }).then(response => response.json())
+    .then(function (data) {
+      contMsg.classList.add(`${data.status}`);
+      contMsg.style.opacity = '1';
+      contMsg.style.top = '3em';
+      msg.innerHTML = data.message;
+
+       setTimeout(() => {
+        contMsg.style.opacity = '0';
+        contMsg.style.top = '0';
+      }, 3000)
+
+    }).catch(function (error) {
+      console.log(error);
+    })
+})
 
 const MyForm = document.getElementById('my-form');
 
@@ -54,12 +74,19 @@ MyForm.addEventListener('submit', async e => {
     mode: 'cors',
     body: formData,
   }).then(response => response.json())
-    .then(function (data) {
-
+    .then((data)=> {
+    
+     
       contMsg.classList.add(`${data.status}`);
       contMsg.style.opacity = '1';
       contMsg.style.top = '3em';
       msg.innerHTML = data.message;
+
+        setTimeout(() => {
+        contMsg.style.opacity = '0';
+        contMsg.style.top = '0';
+      }, 3000)
+
 
       // nome.classList.add(`${data.status}`);
       // sobNome.classList.add(`${data.status}`);
@@ -83,7 +110,7 @@ MyForm.addEventListener('submit', async e => {
         sobNome.classList.remove('error');
         genero.classList.remove('camerror');
         date.classList.remove('camerror');
-      }, 5000)
+      }, 3000)
 
       if (data.status == 'success') {
         document.getElementById('nome_camp').value = '';
@@ -99,16 +126,15 @@ MyForm.addEventListener('submit', async e => {
       contMsg.style.opacity = '1';
       contMsg.style.top = '3em';
       msg.innerHTML = 'Ocorreu um Erro , vamos recarregar a pagina !';
-      console.log(error);
-
+      
       setTimeout(() => {
         window.location.reload()
-      }, 8000)
+      }, 5000)
 
-      // setTimeout(() => {
-      //   contMsg.style.opacity = '0';
-      //   contMsg.style.top = '0';
-      // }, 5000)
+      setTimeout(() => {
+        contMsg.style.opacity = '0';
+        contMsg.style.top = '0';
+      }, 3000)
 
     })
 })

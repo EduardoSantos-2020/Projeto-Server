@@ -1,5 +1,10 @@
 <?Php
 
+header("Access-Control-Allow-Headers:Content-Type");
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin:*");
+header("Access-Control-Allow-Methods:GET,POST");
+
 $obj = new Obj;
 
 class Obj
@@ -16,8 +21,5 @@ class Obj
 
 $conn = mysqli_connect('localhost:3306', 'root', '', 'Banco_users');
 
-if (!$conn) {
 
-    $obj->status('error', 'Estamos com problemas no servidor aguarde !');
-    echo json_encode($obj);
-}
+   

@@ -4,6 +4,7 @@ const nome = document.getElementById('nome_camp');
 const sobNome = document.getElementById('sob_camp');
 const genero = document.querySelector('#genero_camp');
 const date = document.getElementById('datacamp');
+const loading = document.getElementById('loading');
 const camposInput = document.querySelectorAll('.campo');
 const data = new Date();
 let dataAtualizada = data.toLocaleDateString('fr-CA', { day: "numeric", month: "numeric", year: "numeric" });
@@ -25,23 +26,39 @@ function blocked(e) {
 }
 
 window.addEventListener('load', async () => {
-    const asck = await fetch('http://localhost/Projeto-Server/assets/PHP/Informacao.php', {
+  const asck = await fetch('http://localhost/Projeto-Server/assets/PHP/Informacao.php', {
     method: 'GET',
     mode: 'cors',
   }).then(response => response.json())
     .then(function (data) {
-      contMsg.classList.add(`${data.status}`);
-      contMsg.style.opacity = '1';
-      contMsg.style.top = '3em';
-      msg.innerHTML = data.message;
+     loading.style.display = 'block';
+      setTimeout(() => {
+        if (data.status=='error') {
+          loading.style.display = 'none';
+          contMsg.classList.add(`${data.status}`);
+          contMsg.style.opacity = '1';
+          contMsg.style.top = '3em';
+          msg.innerHTML = data.message; 
+        }
+       
+        if (data.status=='success') {
+          loading.style.display = 'none';
+        }
 
-       setTimeout(() => {
-        contMsg.style.opacity = '0';
-        contMsg.style.top = '0';
       }, 3000)
 
+      setTimeout(() => {
+        contMsg.style.opacity = '0';
+        contMsg.style.top = '0';
+        if (data.status=='error') {
+          loading.style.display='block';
+        }
+      }, 5000)
+
     }).catch(function (error) {
-      console.log(error);
+      setTimeout(() => {
+        loading.style.display = 'block';
+      }, 900)
     })
 })
 
@@ -55,7 +72,9 @@ MyForm.addEventListener('submit', async e => {
   Array.from(camposInput).forEach(function (event, i) {
 
     if (!event.value > '') {
-      event.classList.add('groupFocus');
+      setTimeout(() => {
+        event.classList.add('groupFocus');
+      }, 5000)
     } else {
       checkedInput.push(event.value > '');
     }
@@ -74,24 +93,32 @@ MyForm.addEventListener('submit', async e => {
     mode: 'cors',
     body: formData,
   }).then(response => response.json())
-    .then((data)=> {
-    
-     
-      contMsg.classList.add(`${data.status}`);
-      contMsg.style.opacity = '1';
-      contMsg.style.top = '3em';
-      msg.innerHTML = data.message;
+    .then((data) => {
 
-        setTimeout(() => {
+      setTimeout(() => {
+        loading.style.display = 'block';
+      }, 900)
+
+      setTimeout(() => {
+        contMsg.classList.add(`${data.status}`);
+        contMsg.style.opacity = '1';
+        contMsg.style.top = '3em';
+        msg.innerHTML = data.message;
+        loading.style.display = 'none';
+      }, 5000)
+
+      setTimeout(() => {
         contMsg.style.opacity = '0';
         contMsg.style.top = '0';
-      }, 3000)
+      }, 8000)
 
 
       // nome.classList.add(`${data.status}`);
       // sobNome.classList.add(`${data.status}`);
       // genero.classList.add(`cam${data.status}`);
       // date.classList.add(`cam${data.status}`);
+
+      setTimeout(() => {
 
       if (nome.classList.contains('error') && nome.value == '') {
         nome.focus();
@@ -102,6 +129,7 @@ MyForm.addEventListener('submit', async e => {
       } else if (date.classList.contains('camerror') && date.value == '') {
         date.focus();
       }
+    },5000)
 
       setTimeout(() => {
         contMsg.style.opacity = '0';
@@ -122,19 +150,22 @@ MyForm.addEventListener('submit', async e => {
 
     }).catch(function (error) {
 
-      contMsg.classList.add('error');
-      contMsg.style.opacity = '1';
-      contMsg.style.top = '3em';
-      msg.innerHTML = 'Ocorreu um Erro , vamos recarregar a pagina !';
-      
       setTimeout(() => {
-        window.location.reload()
+        loading.style.display = 'block';
+      }, 900)
+
+      setTimeout(() => {
+        contMsg.classList.add('error');
+        contMsg.style.opacity = '1';
+        contMsg.style.top = '3em';
+        msg.innerHTML = 'Ocorreu um erro  atualize a pagina para continuar !';
+        loading.style.display = 'none';
       }, 5000)
 
       setTimeout(() => {
         contMsg.style.opacity = '0';
         contMsg.style.top = '0';
-      }, 3000)
+      }, 8000)
 
     })
 })

@@ -29,13 +29,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($valor)) {
 
 
-      if ($campo != 'genero') {
+      if ($campo == 'genero') {
+     
+         $obj->status('error', 'Erro ao confimar selecione um ' . $erros[] = str_replace("_", " ", $campo) . ' valido !');
 
-        $obj->status('error', 'preencha  ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . " é obrigatório.");
+        break;
+      }
+
+      if ($campo == 'data_nacimento') {
+        $obj->status('error', ' campo vazio preencha a sua ' . $erros[] = str_replace("_", " ", $campo) . '!');
        
         break;
-      } else {
-        $obj->status('error', 'Erro ao confimar Selecione um ' . $erros[] = ucfirst(str_replace("_", " ", $campo)) . ' valido !');
+
+      }else {
+
+        $obj->status('error', 'campo vazio preencha o seu ' . $erros[] = str_replace("_", " ", $campo) . ".");
     
         break;
       }

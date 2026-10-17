@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
 
       if ($campo == 'data_nacimento') {
-        $obj->status('error', ' campo vazio preencha a sua ' . $erros[] = str_replace("_", " ", $campo) . '!');
+        $obj->status('error', ' campo vazio preencha com a sua ' . $erros[] = str_replace("_", " ", $campo) . ' !');
        
         break;
 

@@ -44,6 +44,14 @@ h1 {
 }
 
 
+.loading {
+    top: 1rem;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+
 #msg {
     position: absolute;
     top: 0;
